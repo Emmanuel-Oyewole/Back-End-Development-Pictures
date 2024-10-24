@@ -65,7 +65,7 @@ def create_picture():
     if any(item["id"] == picture["id"] for item in data ):
         return jsonify({"Message": f"picture with id {picture['id']} already present"}), 302
     data.append(picture)
-    return jsonify({"Message": "Success"}), 201
+    return jsonify(picture), 201
 
 ######################################################################
 # UPDATE A PICTURE

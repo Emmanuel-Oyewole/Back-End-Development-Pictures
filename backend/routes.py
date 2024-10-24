@@ -35,7 +35,9 @@ def count():
 ######################################################################
 @app.route("/picture", methods=["GET"])
 def get_pictures():
-    pass
+    if request.method == 'GET':
+        return jsonify(data), 200
+    return jsonify({"error": "Invalid request"}), 400
 
 ######################################################################
 # GET A PICTURE
@@ -44,7 +46,12 @@ def get_pictures():
 
 @app.route("/picture/<int:id>", methods=["GET"])
 def get_picture_by_id(id):
-    pass
+    if request.method == 'GET':
+        info = next((item for item in data if item["id"] == id), None)
+        if info:
+            return jsonify(info),200
+        return jsonify({"error": "Not found"}), 404
+    return jsonify({"error": "Invalid response"}), 400
 
 
 ######################################################################

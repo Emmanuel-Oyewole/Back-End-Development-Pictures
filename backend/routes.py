@@ -95,9 +95,9 @@ def update_picture(id):
 @app.route("/picture/<int:id>", methods=["DELETE"])
 def delete_picture(id):
     if request.method == "DELETE":
-        delete_item = next(item for item in date if item["id"] == id) 
+        delete_item = next((item for item in data if item["id"] == id), None) 
         if delete_item:
             data.remove(delete_item)
-            return jsonify({"message": "success"}), 200
-        return jsonify({"message": "picture not found"})
+            return "", 204
+        return jsonify({"message": "picture not found"}), 404
         

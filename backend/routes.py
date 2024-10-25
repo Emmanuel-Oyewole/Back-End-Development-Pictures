@@ -75,7 +75,7 @@ def create_picture():
 @app.route("/picture/<int:id>", methods=["PUT"])
 def update_picture(id):
     picture = request.json
-     if not picture or "id" not in picture or "pic_url" not in picture or "event_country" not in picture or "event_state" not in picture or "event_city" not in picture or "event_date" not in picture:
+    if not picture or "id" not in picture or "pic_url" not in picture or "event_country" not in picture or "event_state" not in picture or "event_city" not in picture or "event_date" not in picture:
         return jsonify({"error": "Missing data"}), 400
     existing_picture = next((item for item in data if item["id"] == id), None)
     if existing_picture is None:
@@ -94,4 +94,10 @@ def update_picture(id):
 ######################################################################
 @app.route("/picture/<int:id>", methods=["DELETE"])
 def delete_picture(id):
-    pass
+    if request.method == "DELETE":
+        delete_item = next(item for item in date if item["id"] == id) 
+        if delete_item:
+            data.remove(delete_item)
+            return jsonify({"message": "success"}), 200
+        return jsonify({"message": "picture not found"})
+        

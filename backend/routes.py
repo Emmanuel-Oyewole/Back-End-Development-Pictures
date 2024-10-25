@@ -51,7 +51,7 @@ def get_picture_by_id(id):
         if info:
             return jsonify(info),200
         return jsonify({"error": "Not found"}), 404
-    return jsonify({"error": "Invalid response"}), 400
+    return jsonify({"error": "Invalid request"}), 400
 
 
 ######################################################################
